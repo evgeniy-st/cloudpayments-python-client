@@ -117,12 +117,15 @@ class CloudPayments(object):
             raise PaymentError(response)
         raise CloudPaymentsError(response)
 
-    def confirm_payment(self, transaction_id, amount, data=None):
+    def confirm_payment(self, transaction_id, amount, service_fee=None,
+                        data=None):
         params = {
             'Amount': amount,
             'TransactionId': transaction_id
         }
 
+        if service_fee is not None:
+            params['PayerServiceFee'] = service_fee
         if data is not None:
             params['JsonData'] = data
 

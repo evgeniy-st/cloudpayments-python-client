@@ -102,9 +102,11 @@ Python 2.7 или 3.4+
 
 .. code:: python
 
-    confirm_payment(self, transaction_id, amount, data=None)
+    confirm_payment(self, transaction_id, amount, service_fee=None, data=None)
 
 ``data`` — произвольные данные, при отправке будут сериализованы в JSON.
+
+``service_fee`` — сервисный сбор.
 
 В случае успеха метод ничего не возвращает, при ошибке бросает исключение.
 
