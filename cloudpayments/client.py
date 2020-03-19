@@ -11,14 +11,15 @@ from .utils import format_datetime, format_date
 class CloudPayments(object):
     URL = 'https://api.cloudpayments.ru/'
 
-    def __init__(self, public_id, api_secret):
+    def __init__(self, public_id, api_secret, timeout=None):
         self.public_id = public_id
         self.api_secret = api_secret
+        self.timeout = timeout
 
     def _send_request(self, endpoint, params=None, headers=None):
         auth = HTTPBasicAuth(self.public_id, self.api_secret)
         response = requests.post(self.URL + endpoint, json=params, auth=auth, 
-                                 headers=headers)
+                                 headers=headers, timeout=self.timeout)
         return response.json(parse_float=decimal.Decimal)
 
     def test(self, request_id=None):
